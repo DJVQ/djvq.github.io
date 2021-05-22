@@ -1,107 +1,73 @@
-
+DefaultContentLanguage = "en"
+author = "He Yeshuang"
+baseURL = "https://djvq.github.io/"
+copyright = "Copyright © 2008–2019"
+disqusShortname = "YOURSHORTNAME"
+enableInlineShortcodes = true
+footnoteReturnLinkContents = "^"
+googleAnalytics = "UA-FAKE"
+hasCJKLanguage = true
 languageCode = "en"
-defaultContentLanguage = "en"
-
-# 网站标题
-title = "testBlog"                        
-
-theme = "zozo"
-
-# 自动检测是否包含 中文\日文\韩文
-hasCJKLanguage = true                   
-
-summaryLength = 100
-
-# 首页显示文章数量
-paginate = 4        
-
-enableEmoji = true
-
-# Google统计代码
-googleAnalytics = "" 
-
-# Disqus评论系统代码              
-disqusShortname = ""                   
-
-pygmentsUseClasses = true
-pygmentCodeFences = true
-pygmentscodefencesguesssyntax = true
-
-# 必需
-[author]                               
-  name = "YCQ"
-
-[blackfriday]
-  smartypants = false
-
-# 配置菜单
-[[menu.main]]                          
-  name = "Home"
-  weight = 10
-  identifier = "home"
-  url = "/"
-[[menu.main]]
-  name = "Archive"
-  weight = 20
-  identifier = "archive"
-  url = "/posts/"
-[[menu.main]]
-  name = "Tags"
-  weight = 30
-  identifier = "tags"
-  url = "/tags/"
-[[menu.main]]
-  name = "About"
-  weight = 40
-  identifier = "about"
-  url = "/about/"
-
-[params]
-  # 网站二级标题
-  subTitle = "副标题"
-
-
-  # 网站页脚标语                                       
-  footerSlogan = "学习记录" 
-
-
-  # 网站关键字                                 
-  keywords = []  
-
-
-  # 网站描述                                   
-  description = ""
-
-
-  # 是否使用mathjax（数学公式）                     
-  enableMathJax = true
-
-
-  # 是否显示文章摘要                                                
-  enableSummary = true
-                                                   
-  mainSections = ["posts","post"]
-  
-# Valine.
-# You can get your appid and appkey from https://leancloud.cn
-# more info please open https://valine.js.org
-[params.valine]
-  enable = false
-  appId = ""
-  appKey = ""
-  placeholder = " "
-  visitor = true
-
-# Your socail's url
-# 社交地址配置
-[social]
-  github = " "
-  twitter = " "
-  facebook = " "
-  weibo = " "
-  instagram = " "
+theme = "hugo-theme-tokiwa"
+title = "Hugo Themes"
 
 [markup]
-[markup.goldmark]
+[markup.highlight]
+style = "monokailight"
+
 [markup.goldmark.renderer]
-  unsafe = true
+unsafe = true
+
+[params]
+bannerFont = "fonts/exampleFont" 
+description = """
+Tokiwa-iro is the theme color of this site.
+""" 
+env = "production" # for Google Analytics and DISQUS.
+favicon = "img/favicon-32x32.png" 
+fuse = true # for searchbox. "JSON" must added to output contents. See [outputs].
+math = true # for introducing $KaTEX$
+useChineseFonts = true 
+postDateFormat = "2006-1-2"
+
+[menu]
+# Shown in the side menu.
+[[menu.main]]
+identifier = "post"
+name = "Posts"
+url = "/post/"
+weight = 1
+[[menu.main]]
+name = "Tags"
+url = "/tags/"
+weight = 2
+
+[[menu.main]]
+name = "Categories"
+url = "/categories/"
+weight = 2
+
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 3
+
+[taxonomies]
+category = "categories"
+series = "series"
+tag = "tags"
+[social]
+bilibili = "http://example.com/"
+github = "http://github.com/"
+gitlab = "http://gitlab.com/"
+instagram = "http://example.com/"
+mail = "mailto:anon@example.com"
+twitter = "http://twitter.com/"
+weibo = "http://example.com/"
+youtube = "http://youtube.com/"
+zhihu = "http://example.com/"
+# any icon in layouts/partials/svg can be used by the name without the "-line.svg"
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
