@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>English on Hugo Themes</title>
+    <title>English on YCQの个人博客</title>
     <link>https://djvq.github.io/tags/english/</link>
-    <description>Recent content in English on Hugo Themes</description>
+    <description>Recent content in English on YCQの个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Copyright © 2008–2019</copyright>
+    <copyright>Copyright © 2021~2022</copyright>
     <lastBuildDate>Mon, 01 Apr 2019 14:26:00 +0800</lastBuildDate>
     
 	<atom:link href="https://djvq.github.io/tags/english/index.xml" rel="self" type="application/rss+xml" />
@@ -14,10 +14,10 @@
     
     <item>
       <title>Creating a New Theme</title>
-      <link>https://djvq.github.io/posts/english-preview/</link>
+      <link>https://djvq.github.io/post/english-preview/</link>
       <pubDate>Mon, 01 Apr 2019 14:26:00 +0800</pubDate>
       
-      <guid>https://djvq.github.io/posts/english-preview/</guid>
+      <guid>https://djvq.github.io/post/english-preview/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.&lt;/p&gt;
 &lt;p&gt;We&amp;rsquo;ll start with creating a new site with a very basic template. Then we&amp;rsquo;ll add in a few pages and posts. With small variations on that, you will be able to create many different types of web sites.&lt;/p&gt;

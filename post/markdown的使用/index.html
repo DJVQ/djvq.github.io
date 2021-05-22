@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	
-	<title>YCQの个人博客  | Emoji Support</title>
+	<title>YCQの个人博客  | markdown的简单使用</title>
 	<meta name="viewport" content="width=device-width,minimum-scale=1">
 	<meta name="generator" content="Hugo 0.83.1" />
 	
@@ -83,9 +83,7 @@ onload='renderMathInElement(document.body);'></script>
 		<a href="https://djvq.github.io/" title="YCQの个人博客" class="heading font-cursive icon">YCQの个人博客</a>
 	</h2>
 </div>
-<h1 class="pt-2">Emoji Support</h1>
-
-<h3 class="text-java-700 font-normal leading-relaxed pt-2">Guide to emoji usage in Hugo</h3>
+<h1 class="pt-2">markdown的简单使用</h1>
 
 <div class="flex flex-wrap justify-end pt-2 "><div class="md:flex-grow-0 font-light">
 	
@@ -97,12 +95,15 @@ onload='renderMathInElement(document.body);'></script>
 	
 	
 	<a class="post-taxonomy-tag text-eucalyptus-500"
-		href='/tags/emoji'>emoji</a>
+		href='/tags/%E5%AD%A6%E4%B9%A0'>学习</a>&nbsp;&#47;
+	
+	<a class="post-taxonomy-tag text-eucalyptus-500"
+		href='/tags/markdown'>markdown</a>
 	
 	
 	
 </div><time class="text-eucalyptus-500 md:text-right md:flex-grow font-light pl-4"
-		datetime="2019-03-05T00:00:00Z">2019-3-5</time>
+		datetime="2020-05-13T00:00:00Z">2020-5-13</time>
 </div>
 
 <hr />
@@ -115,31 +116,133 @@ onload='renderMathInElement(document.body);'></script>
 
 <article>
 	<section class="mx-auto content">
-		<div class="c-rich-text"><p>Emoji can be enabled in a Hugo project in a number of ways.</p>
-<p>The <a href="https://gohugo.io/functions/emojify/"><code>emojify</code></a> function can be called directly in templates or <a href="https://gohugo.io/templates/shortcode-templates/#inline-shortcodes">Inline Shortcodes</a>.</p>
-<p>To enable emoji globally, set <code>enableEmoji</code> to <code>true</code> in your site’s <a href="https://gohugo.io/getting-started/configuration/">configuration</a> and then you can type emoji shorthand codes directly in content files; e.g.</p>
-<p><span class="nowrap"><span class="emojify">🙈</span> <code>:see_no_evil:</code></span>  <span class="nowrap"><span class="emojify">🙉</span> <code>:hear_no_evil:</code></span>  <span class="nowrap"><span class="emojify">🙊</span> <code>:speak_no_evil:</code></span></p>
-<br>
-<p>The <a href="http://www.emoji-cheat-sheet.com/">Emoji cheat sheet</a> is a useful reference for emoji shorthand codes.</p>
+		<div class="c-rich-text"><h1 id="markdown-快速入门">Markdown 快速入门</h1>
+<h2 id="1-代码块">1 代码块</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#d88200">```javascript
+</span><span style="color:#d88200"></span><span style="color:#75715e">// Fenced **with** highlighting
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">function</span> <span style="color:#75af00">doIt</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#00a8c8">var</span> <span style="color:#75af00">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span> <span style="color:#75af00">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#75af00">slen</span> <span style="color:#111">;</span> <span style="color:#75af00">i</span><span style="color:#f92672">^^</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">setTimeout</span><span style="color:#111">(</span><span style="color:#d88200">&#34;document.z.textdisplay.value = newMake()&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">i</span><span style="color:#f92672">*</span><span style="color:#ae81ff">300</span><span style="color:#111">);</span>
+        <span style="color:#75af00">setTimeout</span><span style="color:#111">(</span><span style="color:#d88200">&#34;window.status = newMake()&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">i</span><span style="color:#f92672">*</span><span style="color:#ae81ff">300</span><span style="color:#111">);</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+<span style="color:#d88200">```</span>
+</code></pre></div><h3 id="示范">示范：</h3>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00a8c8">function</span> <span style="color:#75af00">doIt</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#00a8c8">var</span> <span style="color:#75af00">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span> <span style="color:#75af00">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#75af00">slen</span> <span style="color:#111">;</span> <span style="color:#75af00">i</span><span style="color:#f92672">^^</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#75af00">setTimeout</span><span style="color:#111">(</span><span style="color:#d88200">&#34;document.z.textdisplay.value = newMake()&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">i</span><span style="color:#f92672">*</span><span style="color:#ae81ff">300</span><span style="color:#111">);</span>
+        <span style="color:#75af00">setTimeout</span><span style="color:#111">(</span><span style="color:#d88200">&#34;window.status = newMake()&#34;</span><span style="color:#111">,</span> <span style="color:#75af00">i</span><span style="color:#f92672">*</span><span style="color:#ae81ff">300</span><span style="color:#111">);</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><h2 id="2-标题">2 标题</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">一个#号为一级标题,两个为两级,以此类推,最多六级
+</code></pre></div><h3 id="示范-1">示范：</h3>
+<h1 id="一">一</h1>
+<h2 id="二">二</h2>
+<h3 id="三">三</h3>
+<h4 id="四">四</h4>
+<h5 id="五">五</h5>
+<h6 id="六">六</h6>
+<h2 id="3-字体">3 字体</h2>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">//加粗
+<span style="font-weight:bold">**内容**</span>
+//删除线
+~~内容~~
+//斜体
+<span style="font-style:italic">*内容*</span>
+</code></pre></div><h3 id="示范-2">示范：</h3>
+<p><strong>加粗</strong>
+<del>删除线</del>
+<em>斜体</em></p>
+<h2 id="4-分割线">4 分割线</h2>
+<pre><code>分割线1：
+---
+分割线2：
+***
+</code></pre><h3 id="示范-3">示范：</h3>
 <hr>
-<p><strong>N.B.</strong> The above steps enable Unicode Standard emoji characters and sequences in Hugo, however the rendering of these glyphs depends on the browser and the platform. To style the emoji you can either use a third party emoji font or a font stack; e.g.</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">.emoji {
-font-family: Apple Color Emoji,Segoe UI Emoji,NotoColorEmoji,Segoe UI Symbol,Android Emoji,EmojiSymbols;
-}</code></pre></div>
+<hr>
+<p>两种感觉差不多</p>
+<h2 id="5-图片插入">5 图片插入</h2>
+<pre><code>//在线图片：
+![在线图片](https://i.loli.net/2019/04/13/5cb1d33cf0ee6.jpg)
+//本地图片：
+![本地](/100.jpg)
+</code></pre><h3 id="示范-4">示范：</h3>
+<p>//在线图片：
+<img src="https://i.loli.net/2019/04/13/5cb1d33cf0ee6.jpg" alt="在线图片"></p>
+<hr>
+<p>//本地图片：
+<img src="/100.jpg" alt="本地"></p>
+<h2 id="6-超链接">6 超链接</h2>
+<pre><code>//超链接语法
+[我的查链接](http:baidu.com)
+</code></pre><h2 id="示范-5">示范：</h2>
+<p>//超链接语法
+<a href="http://baidu.com">我的超链接</a></p>
+<h2 id="7-引用">7 引用</h2>
+<pre><code>&gt; This is a block quote
 
-<style>
-.emojify {
-	font-family: Apple Color Emoji,Segoe UI Emoji,NotoColorEmoji,Segoe UI Symbol,Android Emoji,EmojiSymbols;
-	font-size: 2rem;
-	vertical-align: middle;
-}
-@media screen and (max-width:650px) {
-    .nowrap {
-	display: block;
-	margin: 25px 0;
-}
-}
-</style></div>
+</code></pre><h3 id="示范-6">示范：</h3>
+<blockquote>
+<p>This is a block quote</p>
+</blockquote>
+<h2 id="表格">表格</h2>
+<pre><code>| Colors        | Fruits          | Vegetable         |
+| ------------- |:---------------:| -----------------:|
+| Red           | *Apple*         | [Pepper](#Tables) |
+| ~~Orange~~    | Oranges         | **Carrot**        |
+| Green         | ~~***Pears***~~ | Spinach           |
+</code></pre><h3 id="示范-7">示范：</h3>
+<table>
+<thead>
+<tr>
+<th>Colors</th>
+<th style="text-align:center">Fruits</th>
+<th style="text-align:right">Vegetable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Red</td>
+<td style="text-align:center"><em>Apple</em></td>
+<td style="text-align:right"><a href="#Tables">baidu</a></td>
+</tr>
+<tr>
+<td><del>Orange</del></td>
+<td style="text-align:center">Oranges</td>
+<td style="text-align:right"><strong>Carrot</strong></td>
+</tr>
+<tr>
+<td>Green</td>
+<td style="text-align:center"><del><em><strong>Pears</strong></em></del></td>
+<td style="text-align:right">Spinach</td>
+</tr>
+</tbody>
+</table>
+<h2 id="列表">列表</h2>
+<pre><code>//有序
+1. First item
+2. Second item
+3. Third item
+//无序
+- First item
+- Second item
+- Third item
+</code></pre><h3 id="示范-8">示范：</h3>
+<p>//有序</p>
+<ol>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+</ol>
+<p>//无序</p>
+<ul>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item</li>
+</ul>
+</div>
 	</section>
 
 
@@ -229,7 +332,7 @@ font-family: Apple Color Emoji,Segoe UI Emoji,NotoColorEmoji,Segoe UI Symbol,And
 	<div class="text-sm text-gray-500 leading-tight a-gray">
 		Copyright © 2021~2022
 		<br />
-		Built with Hugo and theme <a href="https://github.com/heyeshuang/hugo-theme-tokiwa">Tokiwa</a>. 154 words in this page.
+		Built with Hugo and theme <a href="https://github.com/heyeshuang/hugo-theme-tokiwa">Tokiwa</a>. 444 words in this page.
 	</div>
 </div>
 
@@ -240,21 +343,14 @@ font-family: Apple Color Emoji,Segoe UI Emoji,NotoColorEmoji,Segoe UI Symbol,And
 <hr class="double-line" />
 <div class="flex flex-wrap justify-between pb-2 leading-loose font-serif">
     
-    <a class="flex-grow-0" href="/about/about/">
+    <a class="flex-grow-0" href="/archives/">
         <svg class="fill-current inline-block h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
             height="24">
             <path fill="none" d="M0 0h24v24H0z" />
             <path d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z" /></svg>
-        About
+        
     </a>
     
-    
-    <a class="flex-grow-0" href="/post/english-preview/">
-        Creating a New Theme
-        <svg class="fill-current inline-block h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-            height="24">
-            <path fill="none" d="M0 0h24v24H0z" />
-            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" /></svg></a>
     
 </div>
 <div >

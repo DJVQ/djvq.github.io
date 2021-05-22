@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Theme on Hugo Themes</title>
+    <title>Theme on YCQの个人博客</title>
     <link>https://djvq.github.io/tags/theme/</link>
-    <description>Recent content in Theme on Hugo Themes</description>
+    <description>Recent content in Theme on YCQの个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Copyright © 2008–2019</copyright>
+    <copyright>Copyright © 2021~2022</copyright>
     <lastBuildDate>Mon, 01 Apr 2019 14:26:00 +0800</lastBuildDate>
     
 	<atom:link href="https://djvq.github.io/tags/theme/index.xml" rel="self" type="application/rss+xml" />
@@ -14,10 +14,10 @@
     
     <item>
       <title>Creating a New Theme</title>
-      <link>https://djvq.github.io/posts/english-preview/</link>
+      <link>https://djvq.github.io/post/english-preview/</link>
       <pubDate>Mon, 01 Apr 2019 14:26:00 +0800</pubDate>
       
-      <guid>https://djvq.github.io/posts/english-preview/</guid>
+      <guid>https://djvq.github.io/post/english-preview/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.&lt;/p&gt;
 &lt;p&gt;We&amp;rsquo;ll start with creating a new site with a very basic template. Then we&amp;rsquo;ll add in a few pages and posts. With small variations on that, you will be able to create many different types of web sites.&lt;/p&gt;
@@ -824,145 +824,6 @@ $ vi themes/zafta/layouts/_default/single.html
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note that we removed the date logic from the default template and put it in the post template. Generate the web site and verify the results. Posts have dates and the about page doesn&amp;rsquo;t.&lt;/p&gt;
 &lt;h3 id=&#34;dont-repeat-yourself&#34;&gt;Don&amp;rsquo;t Repeat Yourself&lt;/h3&gt;
 &lt;p&gt;DRY is a good design goal and Hugo does a great job supporting it. Part of the art of a good template is knowing when to add a new template and when to update an existing one. While you&amp;rsquo;re figuring that out, accept that you&amp;rsquo;ll be doing some refactoring. Hugo makes that easy and fast, so it&amp;rsquo;s okay to delay splitting up a template.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Theme Preview</title>
-      <link>https://djvq.github.io/posts/theme-preview/</link>
-      <pubDate>Sun, 31 Mar 2019 17:49:40 +0800</pubDate>
-      
-      <guid>https://djvq.github.io/posts/theme-preview/</guid>
-      <description>&lt;h1 id=&#34;headings&#34;&gt;Headings&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;h1&#34;&gt;H1&lt;/h1&gt;
-&lt;h2 id=&#34;h2&#34;&gt;H2&lt;/h2&gt;
-&lt;h3 id=&#34;h3&#34;&gt;H3&lt;/h3&gt;
-&lt;h4 id=&#34;h4&#34;&gt;H4&lt;/h4&gt;
-&lt;h5 id=&#34;h5&#34;&gt;H5&lt;/h5&gt;
-&lt;h6 id=&#34;h6&#34;&gt;H6&lt;/h6&gt;
-&lt;h1 id=&#34;paragraphs&#34;&gt;Paragraphs&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;This is a paragraph.
-I am still part of the paragraph.
-
-New paragraph.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is a paragraph.
-I am still part of the paragraph.&lt;/p&gt;
-&lt;p&gt;New paragraph.&lt;/p&gt;
-&lt;h1 id=&#34;image&#34;&gt;Image&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;Web Image
-
-![&lt;span style=&#34;color:#f92672&#34;&gt;Web Image&lt;/span&gt;](&lt;span style=&#34;color:#75af00&#34;&gt;https://i.loli.net/2019/04/13/5cb1d33cf0ee6.jpg&lt;/span&gt;)
-
-Local Image
-
-![&lt;span style=&#34;color:#f92672&#34;&gt;Local Image&lt;/span&gt;](&lt;span style=&#34;color:#75af00&#34;&gt;100.jpg&lt;/span&gt;)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Web Image&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/04/13/5cb1d33cf0ee6.jpg&#34; alt=&#34;Web Image&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Local Image&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://djvq.github.io/100.jpg&#34; alt=&#34;Local Image&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;block-quotes&#34;&gt;Block Quotes&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;color:#00a8c8&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;This is a block quote
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;This is a block quote&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;code-blocks&#34;&gt;Code Blocks&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;color:#d88200&#34;&gt;```javascript
-&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Fenced **with** highlighting
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#00a8c8&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;doIt&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#111&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#00a8c8&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#111&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#00a8c8&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;slen&lt;/span&gt; &lt;span style=&#34;color:#111&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;^^&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#111&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#75af00&#34;&gt;setTimeout&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;document.z.textdisplay.value = newMake()&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;);&lt;/span&gt;
-        &lt;span style=&#34;color:#75af00&#34;&gt;setTimeout&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;window.status = newMake()&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color:#111&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#111&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#d88200&#34;&gt;```&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#00a8c8&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;doIt&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#111&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#00a8c8&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#111&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#00a8c8&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;slen&lt;/span&gt; &lt;span style=&#34;color:#111&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;^^&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#111&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#75af00&#34;&gt;setTimeout&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;document.z.textdisplay.value = newMake()&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;);&lt;/span&gt;
-        &lt;span style=&#34;color:#75af00&#34;&gt;setTimeout&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;window.status = newMake()&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;&lt;span style=&#34;color:#111&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color:#111&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#111&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;tables&#34;&gt;Tables&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;| Colors        | Fruits          | Vegetable         |
-| ------------- |:---------------:| -----------------:|
-| Red           | &lt;span style=&#34;font-style:italic&#34;&gt;*Apple*&lt;/span&gt;         | [&lt;span style=&#34;color:#f92672&#34;&gt;Pepper&lt;/span&gt;](&lt;span style=&#34;color:#75af00&#34;&gt;#Tables&lt;/span&gt;) |
-| ~~Orange~~    | Oranges         | &lt;span style=&#34;font-weight:bold&#34;&gt;**Carrot**&lt;/span&gt;        |
-| Green         | ~~***Pears***~~ | Spinach           |
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Colors&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;Fruits&lt;/th&gt;
-&lt;th style=&#34;text-align:right&#34;&gt;Vegetable&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Red&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;em&gt;Apple&lt;/em&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:right&#34;&gt;&lt;a href=&#34;#Tables&#34;&gt;Pepper&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;del&gt;Orange&lt;/del&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Oranges&lt;/td&gt;
-&lt;td style=&#34;text-align:right&#34;&gt;&lt;strong&gt;Carrot&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Green&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;del&gt;&lt;em&gt;&lt;strong&gt;Pears&lt;/strong&gt;&lt;/em&gt;&lt;/del&gt;&lt;/td&gt;
-&lt;td style=&#34;text-align:right&#34;&gt;Spinach&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h1 id=&#34;list-types&#34;&gt;List Types&lt;/h1&gt;
-&lt;h4 id=&#34;ordered-list&#34;&gt;Ordered List&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;color:#00a8c8&#34;&gt;1.&lt;/span&gt; First item
-&lt;span style=&#34;color:#00a8c8&#34;&gt;2.&lt;/span&gt; Second item
-&lt;span style=&#34;color:#00a8c8&#34;&gt;3.&lt;/span&gt; Third item
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
-&lt;li&gt;First item&lt;/li&gt;
-&lt;li&gt;Second item&lt;/li&gt;
-&lt;li&gt;Third item&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;unordered-list&#34;&gt;Unordered List&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;color:#00a8c8&#34;&gt;-&lt;/span&gt; First item
-&lt;span style=&#34;color:#00a8c8&#34;&gt;-&lt;/span&gt; Second item
-&lt;span style=&#34;color:#00a8c8&#34;&gt;-&lt;/span&gt; Third item
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;First item&lt;/li&gt;
-&lt;li&gt;Second item&lt;/li&gt;
-&lt;li&gt;Third item&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;math&#34;&gt;Math&lt;/h1&gt;
-&lt;pre&gt;&lt;code&gt;$$
-evidence\_{i}=\sum\_{j}W\_{ij}x\_{j}+b\_{i}
-$$
-
-$$
-AveP = \int_0^1 p(r) dr
-$$
-
-When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
-$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;$$
-evidence_{i}=\sum_{j}W_{ij}x_{j}+b_{i}
-$$&lt;/p&gt;
-&lt;p&gt;$$
-AveP = \int_0^1 p(r) dr
-$$&lt;/p&gt;
-&lt;p&gt;When $a \ne 0$, there are two solutions to (ax^2 + bx + c = 0) and they are
-$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$&lt;/p&gt;
-&lt;h4 id=&#34;emoji&#34;&gt;Emoji&lt;/h4&gt;
-&lt;p&gt;This is a test for emoji.
-:smile:
-:see_no_evil:
-:smile_cat:
-:watermelon:&lt;/p&gt;</description>
     </item>
     
   </channel>

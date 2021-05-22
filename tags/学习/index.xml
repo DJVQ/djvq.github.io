@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>学习 on Hugo Themes</title>
+    <title>学习 on YCQの个人博客</title>
     <link>https://djvq.github.io/tags/%E5%AD%A6%E4%B9%A0/</link>
-    <description>Recent content in 学习 on Hugo Themes</description>
+    <description>Recent content in 学习 on YCQの个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Copyright © 2008–2019</copyright>
+    <copyright>Copyright © 2021~2022</copyright>
     <lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://djvq.github.io/tags/%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
@@ -14,10 +14,10 @@
     
     <item>
       <title>markdown的简单使用</title>
-      <link>https://djvq.github.io/posts/markdown%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>https://djvq.github.io/post/markdown%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://djvq.github.io/posts/markdown%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://djvq.github.io/post/markdown%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>&lt;h1 id=&#34;markdown-快速入门&#34;&gt;Markdown 快速入门&lt;/h1&gt;
 &lt;h2 id=&#34;1-代码块&#34;&gt;1 代码块&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;color:#d88200&#34;&gt;```javascript
