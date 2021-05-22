@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://djvq.github.io/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://djvq.github.io/tags/markdown/</loc>
     <lastmod>2020-05-13T00:00:00+00:00</lastmod>
   </url><url>
@@ -12,9 +15,6 @@
     <lastmod>2020-05-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://djvq.github.io/tags/</loc>
-    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://djvq.github.io/</loc>
     <lastmod>2020-05-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://djvq.github.io/tags/%E5%AD%A6%E4%B9%A0/</loc>
@@ -39,9 +39,6 @@
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://djvq.github.io/about/</loc>
-    <lastmod>2019-02-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://djvq.github.io/about/about/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://djvq.github.io/categories/</loc>
