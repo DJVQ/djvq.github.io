@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>开源项目 on YCQの个人博客</title>
+    <link>https://djvq.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
+    <description>Recent content in 开源项目 on YCQの个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright © 2021~2022</copyright>
+    <lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://djvq.github.io/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>markdown的简单使用</title>
+      <link>https://djvq.github.io/post/java%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://djvq.github.io/post/java%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
+      <description>&lt;h2 id=&#34;项目一-halo---基于java的博客系统&#34;&gt;项目一： Halo - 基于java的博客系统&lt;/h2&gt;
+&lt;p&gt;网址： &lt;a href=&#34;https://github.com/halo-dev/halo&#34;&gt;https://github.com/halo-dev/halo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;难度：入门&lt;/p&gt;
+&lt;p&gt;技术点：spring boot（后端）， Freemarker（模版）等等&lt;/p&gt;
+&lt;h2 id=&#34;项目二hutool---java工具包&#34;&gt;项目二：Hutool - Java工具包&lt;/h2&gt;
+&lt;p&gt;网址：https://github.com/looly/hutool&lt;/p&gt;
+&lt;h2 id=&#34;项目三piggy-metrics---springcloud-和-springboot的实践范例&#34;&gt;项目三：Piggy Metrics - SpringCloud 和 Springboot的实践范例&lt;/h2&gt;
+&lt;p&gt;网址：https://github.com/sqshq/PiggyMetrics&lt;/p&gt;
+&lt;p&gt;难度：中高&lt;/p&gt;
+&lt;p&gt;技术点：Springboot, SpringCloud, Docke (后端找工作常用），负载均衡，熔断，监控&lt;/p&gt;
+&lt;h2 id=&#34;项目四hanlp---汉语自然语言处理&#34;&gt;项目四：HanLP - 汉语自然语言处理&lt;/h2&gt;
+&lt;p&gt;网址：https://github.com/hankcs/hanLP&lt;/p&gt;
+&lt;p&gt;难度：高&lt;/p&gt;
+&lt;p&gt;技术点：机器学习，自然语言处理&lt;/p&gt;
+&lt;h2 id=&#34;项目五spring-boot-in-action---适合初学者的spring-boot实战项目&#34;&gt;项目五：Spring-Boot-In-Action - 适合初学者的Spring-boot实战项目&lt;/h2&gt;
+&lt;p&gt;网址：https://github.com/hansonwang99/Spring-Boot-In-Action&lt;/p&gt;
+&lt;p&gt;难度：中&lt;/p&gt;
+&lt;p&gt;技术点：数据库，日志，应用监控，内部机制&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
