@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>maven on YCQの个人博客</title>
+    <link>https://djvq.github.io/tags/maven/</link>
+    <description>Recent content in maven on YCQの个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright © 2021~2022</copyright>
+    <lastBuildDate>Sat, 26 Jun 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://djvq.github.io/tags/maven/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初识maven</title>
+      <link>https://djvq.github.io/post/%E5%88%9D%E8%AF%86%E5%88%ABmaven/</link>
+      <pubDate>Sat, 26 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://djvq.github.io/post/%E5%88%9D%E8%AF%86%E5%88%ABmaven/</guid>
+      <description>&lt;h1 id=&#34;目录&#34;&gt;目录&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#Project&#34;&gt;Project Object Model&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%E7%AE%80%E4%BB%8B&#34;&gt;简介&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE&#34;&gt;基本配置&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#maven%E7%9A%84%E5%8D%8F%E4%BD%9C%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7&#34;&gt;maven的协作相关属性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pom%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB&#34;&gt;pom之间的关系&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%E7%BB%A7%E6%89%BF&#34;&gt;继承&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%E8%A2%AB%E7%BB%A7%E6%89%BF%E9%A1%B9%E7%9B%AE%E4%B8%8E%E7%BB%A7%E6%89%BF%E9%A1%B9%E7%9B%AE%E6%98%AF%E7%88%B6%E5%AD%90%E7%9B%AE%E5%BD%95%E5%85%B3%E7%B3%BB&#34;&gt;被继承项目与继承项目是父子目录关系&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E8%A2%AB%E7%BB%A7%E6%89%BF%E9%A1%B9%E7%9B%AE%E4%B8%8E%E7%BB%A7%E6%89%BF%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%B8%8D%E6%98%AF%E7%88%B6%E5%AD%90%E5%85%B3%E7%B3%BB&#34;&gt;被继承项目与继承项目的目录结构不是父子关系&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E8%81%9A%E5%90%88&#34;&gt;聚合&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%E8%A2%AB%E8%81%9A%E5%90%88%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%AD%90%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE%E5%9C%A8%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%B8%8A%E6%98%AF%E7%88%B6%E5%AD%90%E5%85%B3%E7%B3%BB&#34;&gt;被聚合项目和子模块项目在目录结构上是父子关系&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E8%A2%AB%E8%81%9A%E5%90%88%E9%A1%B9%E7%9B%AE%E4%B8%8E%E5%AD%90%E6%A8%A1%E5%9D%97%E9%A1%B9%E7%9B%AE%E5%9C%A8%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%B8%8A%E4%B8%8D%E6%98%AF%E7%88%B6%E5%AD%90%E5%85%B3%E7%B3%BB&#34;&gt;被聚合项目与子模块项目在目录结构上不是父子关系&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E8%81%9A%E5%90%88%E4%B8%8E%E7%BB%A7%E6%89%BF%E5%90%8C%E6%97%B6%E8%BF%9B%E8%A1%8C&#34;&gt;聚合与继承同时进行&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%BE%9D%E8%B5%96&#34;&gt;依赖&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86&#34;&gt;依赖管理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E5%B1%9E%E6%80%A7&#34;&gt;属性&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E6%9E%84%E5%BB%BA%E9%85%8D%E7%BD%AE&#34;&gt;构建配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E9%A1%B9%E7%9B%AE%E4%BF%A1%E6%81%AF&#34;&gt;项目信息&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE&#34;&gt;环境配置&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;project-object-model&#34;&gt;&lt;strong&gt;Project Object Model&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;简介&#34;&gt;&lt;strong&gt;简介&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Project Object Model 即项目对象类型，简写为 POM。pom.xml就是maven的配置文件，用以描述项目的各种信息。&lt;/p&gt;
+&lt;h2 id=&#34;基本配置&#34;&gt;&lt;strong&gt;基本配置&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;project&lt;/strong&gt; 是pom.xml中描述的根。
+&lt;strong&gt;modelVersion&lt;/strong&gt; 指定pom.xml符合哪个版本的描述符。maven 2 和 3只能为4.0.0。&lt;/p&gt;
+&lt;h3 id=&#34;maven的协作相关属性&#34;&gt;&lt;strong&gt;maven的协作相关属性&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;一个最简单的pom.xml的定义必须包含modelVersion、groupId、artifactId和version这四个元素，当然这其中的元素也是可以从它的父项目中继承的。在Maven中，使用groupId、artifactId和version组成groupdId:artifactId:version的形式来唯一确定一个项目：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0  
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      http://maven.apache.org/maven-v4_0_0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;        含义：组织标识，定义了项目属于哪个组，风向标，坐标，或者说若把本项目打包，一般对应项目包结构
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;        用途：此名称则是本地仓库中的路径，列如：otowa.user.dao，在M2_REPO目录下，将是: otowa/user/dao目录
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;        命名规范:项目名称，模块，子模块
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;    --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;otowa.user.dao&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;        含义：项目名称也可以说你所模块名称，定义当面Maven项目在组中唯一的ID
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;        用途：例如：user-dao，在M2_REPO目录下，将是：otowa/user/dao/user-dao目录
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;        命名规范:唯一就好
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;    --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;user-dao&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;        含义：项目当前的版本号
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;        用途：例如：0.0.1-SNAPSHOT，在M2_REPO目录下，将是：otowa/user/dao/user-dao/0.0.1-SNAPSHOT目录
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;        注意：不要在 artifactId 中包含点号(.)
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;    --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.0.1-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 打包的格式，可以为：pom , jar , maven-plugin , ejb , war , ear , rar , par --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;war&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 元素声明了一个对用户更为友好的项目名称 --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;maven&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在maven中，根据groupId、artifactId、version组合成groupId:artifactId:version来唯一识别一个jar包。
+对于version：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;maven 有自己的版本规范，一般是如下定义 major version、minor version、incremental version-qualifier ，比如 1.2.3-beta-01。要说明的是，maven 自己判断版本的算法是 major、minor、incremental 部分用数字比较，qualifier 部分用字符串比较，所以要小心 alpha-2 和 alpha-15 的比较关系，最好用 alpha-02 的格式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;maven 在版本管理时候可以使用几个特殊的字符串 SNAPSHOT、LATEST、RELEASE。比如 1.0-SNAPSHOT。各个部分的含义和处理逻辑如下说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SNAPSHOT - 这个版本一般用于开发过程中，表示不稳定的版本。&lt;/li&gt;
+&lt;li&gt;LATEST - 指某个特定构件的最新发布，这个发布可能是一个发布版，也可能是一个 snapshot 版，具体看哪个时间最后。&lt;/li&gt;
+&lt;li&gt;RELEASE ：指最后一个发布版。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pom之间的关系&#34;&gt;&lt;strong&gt;pom之间的关系&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Maven在建立项目的时候是基于Maven项目下的pom.xml进行的，我们项目依赖的信息和一些基本信息都是在这个文件里面定义的。那如果当我们有多个项目要进行，这多个项目有些配置内容是相同的，有些是要彼此关联的，那如果按照传统的做法的话我们就需要在多个项目中都定义这些重复的内容。这无疑是非常耗费时间和不易维护的。好在Maven给我们提供了一个pom的继承和聚合的功能。&lt;/p&gt;
+&lt;p&gt;要继承pom就需要有一个父pom，在Maven中定义了超级pom.xml，任何没有申明自己父pom.xml的pom.xml都将默认继承自这个超级pom.xml。&lt;/p&gt;
+&lt;p&gt;　　位置：&lt;/p&gt;
+&lt;p&gt;　　　　在Maven 2.xxx版本中，比如maven-2.0.9-uber.jar，打开此Jar文件后，在包包org.apache.maven.project下会有pom-4.0.0.xml的文件。&lt;/p&gt;
+&lt;p&gt;　　　　但是到了3.xxx版本之后在： aven安装目录下的：/lib/maven-model-builder-version.jar中 \org\apache\maven\mode目录中的pom-4.0.0.xml。&lt;/p&gt;
+&lt;p&gt;超级pom的定义：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;Licensed to the Apache Software Foundation (ASF) under one
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;or more contributor license agreements.  See the NOTICE file
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;distributed with this work for additional information
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;regarding copyright ownership.  The ASF licenses this file
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;to you under the Apache License, Version 2.0 (the
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;License&amp;#34;); you may not use this file except in compliance
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;with the License.  You may obtain a copy of the License at
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;    http://www.apache.org/licenses/LICENSE-2.0
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;Unless required by applicable law or agreed to in writing,
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;software distributed under the License is distributed on an
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;AS IS&amp;#34; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;KIND, either express or implied.  See the License for the
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;specific language governing permissions and limitations
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;under the License.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;--&amp;gt;&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- START SNIPPET: superpom --&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;repositories&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;repository&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;central&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Central Repository&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://repo.maven.apache.org/maven2&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;layout&amp;gt;&lt;/span&gt;default&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/layout&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;snapshots&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;false&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/enabled&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/snapshots&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;pluginRepositories&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;pluginRepository&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;central&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Central Repository&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://repo.maven.apache.org/maven2&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;layout&amp;gt;&lt;/span&gt;default&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/layout&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;snapshots&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;false&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/enabled&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/snapshots&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;releases&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;updatePolicy&amp;gt;&lt;/span&gt;never&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/updatePolicy&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/releases&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/pluginRepository&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/pluginRepositories&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;${project.basedir}/target&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;outputDirectory&amp;gt;&lt;/span&gt;${project.build.directory}/classes&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/outputDirectory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;finalName&amp;gt;&lt;/span&gt;${project.artifactId}-${project.version}&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/finalName&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;testOutputDirectory&amp;gt;&lt;/span&gt;${project.build.directory}/test-classes&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/testOutputDirectory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;sourceDirectory&amp;gt;&lt;/span&gt;${project.basedir}/src/main/java&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/sourceDirectory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;scriptSourceDirectory&amp;gt;&lt;/span&gt;${project.basedir}/src/main/scripts&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/scriptSourceDirectory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;testSourceDirectory&amp;gt;&lt;/span&gt;${project.basedir}/src/test/java&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/testSourceDirectory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;resources&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;resource&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;${project.basedir}/src/main/resources&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/resource&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/resources&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;testResources&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;testResource&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;${project.basedir}/src/test/resources&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/testResource&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/testResources&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;pluginManagement&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- NOTE: These plugins will be removed from future versions of the super POM --&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- They are kept for the moment as they are very unlikely to conflict with lifecycle mappings (MNG-4453) --&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-antrun-plugin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.3&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-assembly-plugin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.2-beta-5&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-dependency-plugin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.8&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-release-plugin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.3.2&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/pluginManagement&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;reporting&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;outputDirectory&amp;gt;&lt;/span&gt;${project.build.directory}/site&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/outputDirectory&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/reporting&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;profiles&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- NOTE: The release profile will be removed from future versions of the super POM --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;profile&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;release-profile&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;activation&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;performRelease&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/activation&amp;gt;&lt;/span&gt;
+
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;inherited&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/inherited&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-source-plugin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;attach-sources&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
+                  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;jar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;inherited&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/inherited&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-javadoc-plugin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;attach-javadocs&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
+                  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;jar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;inherited&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/inherited&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-deploy-plugin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;updateReleaseInfo&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/updateReleaseInfo&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/profile&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/profiles&amp;gt;&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- END SNIPPET: superpom --&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由上面的超级pom.xml的内容我们可以看到pom.xml中没有groupId、artifactId和version的定义，所以在建立自己的pom.xml的时候就需要定义这三个元素。和java里面的继承类似，子pom.xml会完全继承父pom.xml中所有的元素，而且对于相同的元素，一般子pom.xml中的会覆盖父pom.xml中的元素，但是有几个特殊的元素它们会进行合并而不是覆盖。这些特殊的元素是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;dependencies&lt;/li&gt;
+&lt;li&gt;developers&lt;/li&gt;
+&lt;li&gt;contributors&lt;/li&gt;
+&lt;li&gt;plugin列表，包括plugin下面的* * reports&lt;/li&gt;
+&lt;li&gt;resources&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;继承&#34;&gt;&lt;strong&gt;继承&lt;/strong&gt;&lt;/h4&gt;
+&lt;h5 id=&#34;被继承项目与继承项目是父子目录关系&#34;&gt;&lt;strong&gt;被继承项目与继承项目是父子目录关系&lt;/strong&gt;&lt;/h5&gt;
+&lt;p&gt;现在假设有一个项目projectA，它的pom.xml定义如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后有另一个项目projectB，而且projectB是跟projectA的pom.xml文件处于同一个目录下，这时候如果projectB需要继承自projectA的话可以这样定义projectB的pom.xml文件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;parent&amp;gt;&lt;/span&gt;  
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/parent&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectB&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由projectB的pom.xml文件的定义可以知道，当需要继承指定的一个Maven项目时，需要在pom.xml中定义一个parent元素，在这个元素中指明需要继承项目的groupId、artifactId和version。&lt;/p&gt;
+&lt;h5 id=&#34;被继承项目与继承项目的目录结构不是父子关系&#34;&gt;&lt;strong&gt;被继承项目与继承项目的目录结构不是父子关系&lt;/strong&gt;&lt;/h5&gt;
+&lt;p&gt;当被继承项目与继承项目的目录结构不是父子关系的时候，再利用上面的配置是不能实现Maven项目的继承关系的，这个时候就需要在子项目的pom.xml文件定义中的parent元素下再加上一个relativePath元素的定义，用以描述父项目的pom.xml文件相对于子项目的pom.xml文件的位置。&lt;/p&gt;
+&lt;p&gt;　　假设有两个项目，projectA和projectB，projectB还是继承自projectA，但是现在projectB不在projectA的子目录中，而是与projectA处于同一目录中。这个时候projectA和projectB的目录结构如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;　　------projectA
+
+　　　　------pom.xml
+
+　　------projectB
+
+　　　　------pom.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　这个时候我们可以看出projectA的pom.xml相对于projectB的pom.xml的位置是“../projectA/pom.xml”，所以这个时候projectB的pom.xml的定义应该如下所示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;parent&amp;gt;&lt;/span&gt;  
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+       &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;relativePath&amp;gt;&lt;/span&gt;../projectA/pom.xml&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/relativePath&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/parent&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectB&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;聚合&#34;&gt;&lt;strong&gt;聚合&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;如果projectA聚合到projectB，那么就可以说projectA是projectB的子模块， projectB是被聚合项目，也可以类似于继承那样称为父项目。对于聚合而言，这个主体应该是被聚合的项目。所以，需要在被聚合的项目中定义它的子模块，而不是像继承那样在子项目中定义父项目。具体做法是：&lt;/p&gt;
+&lt;p&gt;修改被聚合项目的pom.xml中的packaging元素的值为pom
+在被聚合项目的pom.xml中的modules元素下指定它的子模块项目
+对于聚合而言，当在被聚合的项目上使用Maven命令时，实际上这些命令都会在它的子模块项目上使用。这就是Maven中聚合的一个非常重要的作用。假设这样一种情况，同时需要打包或者编译projectA、projectB、projectC和projectD，按照正常的逻辑一个一个项目去使用mvn compile或mvn package进行编译和打包，对于使用Maven而言，这样使用是非常麻烦的。因为Maven给我们提供了聚合的功能。只需要再定义一个超级项目，然后在超级项目的pom.xml中定义这个几个项目都是聚合到这个超级项目的。之后只需要对这个超级项目进行mvn compile，它就会把那些子模块项目都进行编译。&lt;/p&gt;
+&lt;h5 id=&#34;被聚合项目和子模块项目在目录结构上是父子关系&#34;&gt;&lt;strong&gt;被聚合项目和子模块项目在目录结构上是父子关系&lt;/strong&gt;&lt;/h5&gt;
+&lt;p&gt;拿上面定义的projectA和projectB来举例子，现在假设需要把projectB聚合到projectA中。projectA和projectB的目录结构如下所示：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;　　------projectA
+
+　　　　------projectB
+
+　　　　　　-----pom.xml
+
+　　　　------pom.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　这个时候projectA的pom.xml应该这样定义：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;pom&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modules&amp;gt;&lt;/span&gt;  
+       &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;projectB&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modules&amp;gt;&lt;/span&gt;  
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由上面的定义我们可以看到被聚合的项目的packaging类型应该为pom，而且一个项目可以有多个子模块项目。对于聚合这种情况，我们使用子模块项目的artifactId来作为module的值，表示子模块项目相对于被聚合项目的地址，在上面的示例中就表示子模块projectB是处在被聚合项目的子目录下，即与被聚合项目的pom.xml处于同一目录。这里使用的module值是子模块projectB对应的目录名projectB，而不是子模块对应的artifactId。这个时候当我们对projectA进行mvn package命令时，实际上Maven也会对projectB进行打包。&lt;/p&gt;
+&lt;h5 id=&#34;被聚合项目与子模块项目在目录结构上不是父子关系&#34;&gt;&lt;strong&gt;被聚合项目与子模块项目在目录结构上不是父子关系&lt;/strong&gt;&lt;/h5&gt;
+&lt;p&gt;那么当被聚合项目与子模块项目在目录结构上不是父子关系的时候，应该怎么来进行聚合呢？还是像继承那样使用relativePath元素吗？答案是非也，具体做法是在module元素中指定以相对路径的方式指定子模块。下面一个例子:&lt;/p&gt;
+&lt;p&gt;　　继续使用上面的projectA和projectB，还是需要把projectB聚合到projectA，但是projectA和projectB的目录结构不再是父子关系，而是如下所示的这种关系：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;　　------projectA
+
+　　　　------pom.xml
+
+　　------projectB
+
+　　　　------pom.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;　　这个时候projectA的pom.xml文件就应该这样定义：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;  
+   
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;pom&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modules&amp;gt;&lt;/span&gt;  
+       &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;../projectB&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modules&amp;gt;&lt;/span&gt;  
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;注意看module的值是“../projectB”，“..”是代表当前目录的上层目录，所以它表示子模块projectB是被聚合项目projectA的pom.xml文件所在目录（即projectA）的上层目录下面的子目录，即与projectA处于同一目录层次。注意，这里的projectB对应的是projectB这个项目的目录名称，而不是它的artifactId。&lt;/p&gt;
+&lt;h5 id=&#34;聚合与继承同时进行&#34;&gt;&lt;strong&gt;聚合与继承同时进行&lt;/strong&gt;&lt;/h5&gt;
+&lt;p&gt;假设有这样一种情况，有两个项目，projectA和projectB，现在需要projectB继承projectA，同时需要把projectB聚合到projectA。然后projectA和projectB的目录结构如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;------projectA
+
+    ------pom.xml
+
+------projectB
+
+    ------pom.xml
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;那么这个时候按照上面说的那样，projectA的pom.xml中需要定义它的packaging为pom，需要定义它的modules，所以projectA的pom.xml应该这样定义：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;pom&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modules&amp;gt;&lt;/span&gt;  
+       &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;module&amp;gt;&lt;/span&gt;../projectB&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/module&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modules&amp;gt;&lt;/span&gt;  
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;而projectB是继承自projectA的，所以需要在projectB的pom.xml文件中新增一个parent元素，用以定义它继承的项目信息。所以projectB的pom.xml文件的内容应该这样定义：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;parent&amp;gt;&lt;/span&gt;  
+       &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+       &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+       &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+       &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;relativePath&amp;gt;&lt;/span&gt;../projectA/pom.xml&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/relativePath&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/parent&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectB&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;  
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;依赖&#34;&gt;&lt;strong&gt;依赖&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;依赖关系列表（dependency list）是POM的重要部分&lt;/p&gt;
+&lt;p&gt;项目之间的依赖是通过pom.xml文件里面的dependencies元素下面的dependency元素进行的。一个dependency元素定义一个依赖关系。在dependency元素中我们主要通过依赖项目的groupId、artifactId和version来定义所依赖的项目。&lt;/p&gt;
+&lt;p&gt;先来看一个简单的项目依赖的示例吧，假设现在有一个项目projectA，然后它里面有对junit的依赖，那么它的pom.xml就类似以下这个样子：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;  
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectB&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;  
+   
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;  
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;  
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;junit&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;junit&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;3.8.1&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;  
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;optional&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/optional&amp;gt;&lt;/span&gt;  
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;  
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;  
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;groupId&lt;/strong&gt;, &lt;strong&gt;artifactId&lt;/strong&gt;, &lt;strong&gt;version&lt;/strong&gt;:描述了依赖的项目唯一标志。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;type&lt;/strong&gt;：对应于依赖项目的packaging类型，默认是jar。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;scope&lt;/strong&gt;:用于限制相应的依赖范围、传播范围。scope的主要取值范围如下（还有一个是在Maven2.0.9以后版本才支持的import，关于import作用域将在后文《Dependency介绍》中做介绍）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;test&lt;/strong&gt;:在测试范围有效，它在执行命令test的时候才执行，并且它不会传播给其他模块进行引入，比如 junit,dbunit 等测试框架。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;compile&lt;/strong&gt;(default 默认):这是它的默认值，这种类型很容易让人产生误解，以为只有在编译的时候才是需要的，其实这种类型表示所有的情况都是有用的，包括编译和运行时。而且这种类型的依赖性是可以传递的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;runtime&lt;/strong&gt;:在程序运行的时候依赖，在编译的时候不依赖。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;provided&lt;/strong&gt;:这个跟compile很类似，但是它表示你期望这个依赖项目在运行时由JDK或者容器来提供。这种类型表示该依赖只有在测试和编译的情况下才有效，在运行时将由JDK或者容器提供。这种类型的依赖性是不可传递的。比如 javaee：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;eclipse开发web环境中是没有javaee必须要手动添加。&lt;/li&gt;
+&lt;li&gt;myeclipse新建web项目会有JavaEE(servlet-api.jar,jsp-api.jar&amp;hellip;)web容器依赖的jar包，一般都是做开发的时候才使用。但是myeclipse不会把这些 jar包发布的，lib下你是找不到javaee引入的jar包,因为myeclipse发布项目的时候会忽略它。为什么？因为tomcat容器bin/lib已经存在了这个jar包了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;system&lt;/strong&gt;：这种类型跟provided类似，唯一不同的就是这种类型的依赖要自己提供jar包，这需要与另一个元素systemPath来结合使用。systemPath将指向我们系统上的jar包的路径，而且必须是给定的绝对路径。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;systemPath&lt;/strong&gt;：上面已经说过了这个元素是在scope的值为system的时候用于指定依赖的jar包在系统上的位置的，而且是绝对路径。该元素必须在依赖的 jar包的scope为system时才能使用，否则Maven将报错。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;optional&lt;/strong&gt;：当该项目本身作为其他项目的一个依赖时标记该依赖为可选项。假设现在projectA有一个依赖项projectB，把projectB这个依赖项设为optional，这表示projectB在projectA的运行时不一定会用到。这个时候如果我们有另一个项目projectC，它依赖于projectA，那么这个时候因为projectB对于projectA是可选的，所以Maven在建立projectC的时候就不会安装projectB，这个时候如果projectC确实需要使用到projectB，那么它就可以定义自己对projectB的依赖。当一个依赖是可选的时候，我们把optional元素的值设为true，否则就不设置optional元素。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;exclusions&lt;/strong&gt;：考虑这样一种情况，的projectA依赖于projectB，然后projectB又依赖于projectC，但是在projectA里面不需要projectB依赖的projectC，那么这个时候我们就可以在依赖projectB的时候使用exclusions元素下面的exclusion排除projectC。这个时候我们可以这样定义projectA对projectB的依赖：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;  
+     &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;  
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectB&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;  
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;exclusions&amp;gt;&lt;/span&gt;  
+                   &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;exclusion&amp;gt;&lt;/span&gt;  
+                          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.tiantian.mavenTest&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;  
+                          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;projectC&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;  
+                   &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/exclusion&amp;gt;&lt;/span&gt;  
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/exclusions&amp;gt;&lt;/span&gt;  
+     &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;  
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;依赖管理&#34;&gt;&lt;strong&gt;依赖管理&lt;/strong&gt;&lt;/h5&gt;
+&lt;p&gt;dependencyManagement 是表示依赖 jar 包的声明。即你在项目中的 dependencyManagement 下声明了依赖，maven 不会加载该依赖，dependencyManagement 声明可以被子 POM 继承。&lt;/p&gt;
+&lt;p&gt;dependencyManagement 的一个使用案例是当有父子项目的时候，父项目中可以利用 dependencyManagement 声明子项目中需要用到的依赖 jar 包，之后，当某个或者某几个子项目需要加载该依赖的时候，就可以在子项目中 dependencies 节点只配置 groupId 和 artifactId 就可以完成依赖的引用。如果某个子项目需要另外的一个版本，只需要声明version即可。dependencyManagement中定义的只是依赖的声明，并不实现引入，因此子项目需要显式的声明需要用的依赖。&lt;/p&gt;
+&lt;p&gt;dependencyManagement 主要是为了统一管理依赖包的版本，确保所有子项目使用的版本一致，类似的还有plugins和pluginManagement。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;举例&lt;/strong&gt;
+在父项目的POM.xml中配置:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-web&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.2.3.RELEASE&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependencyManagement&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;子项目则无需指定版本信息：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-web&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;属性&#34;&gt;&lt;strong&gt;属性&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;在pom.xml文件中我们可以使用${propertyName}的形式引用属性。是值的占位符，类似EL，类似ant的属性，比如${X}，可用于pom文件任何赋值的位置。有以下分类：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;env.propertyName&lt;/strong&gt;：这种形式表示引用的是环境变量，比如我们需要引用当前系统的环境变量PATH的时候，就可以使用${env.PATH}。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;project.propertyName&lt;/strong&gt;：这种形式表示引用的是当前这个pom.xml中project根元素下面的子元素的值。比如我们需要引用当前project下面的version的时候，就可以使用${project.version}。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;settings.propertyName&lt;/strong&gt;：这种形式引用的是Maven本地配置文件settings.xml或本地Maven安装目录下的settings.xml文件根元素settings下的元素。比如我们需要引用settings下的本地仓库localRepository元素的值时，我们可以用${settings.localRepository}&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Java System Properties&lt;/strong&gt;：java的系统属性，所有在java中使用java.lang.System.getProperties()能够获取到的属性都可以在pom.xml中引用，比如${java.home}。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自定义&lt;/strong&gt;：pom.xml中properties元素下面的子元素作为属性。假如在pom.xml中有如下一段代码&lt;properties&gt;&amp;lt;hello.world&amp;gt;helloWorld&amp;lt;/hello.world&amp;gt;&lt;/properties&gt;，那么我们就可以使用${hello.world}引用到对应的helloWorld。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;构建配置&#34;&gt;&lt;strong&gt;构建配置&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;build&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;build 可以分为 &amp;ldquo;project build&amp;rdquo; 和 &amp;ldquo;profile build&amp;rdquo;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- &amp;#34;Project Build&amp;#34; contains more elements than just the BaseBuild set --&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;...&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;profiles&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;profile&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- &amp;#34;Profile Build&amp;#34; contains a subset of &amp;#34;Project Build&amp;#34;s elements --&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;...&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/profile&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/profiles&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;基本构建配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;defaultGoal&amp;gt;&lt;/span&gt;install&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/defaultGoal&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;${basedir}/target&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;finalName&amp;gt;&lt;/span&gt;${artifactId}-${version}&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/finalName&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;filters&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;filter&amp;gt;&lt;/span&gt;filters/filter1.properties&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/filter&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/filters&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;defaultGoal&lt;/strong&gt; : 默认执行目标或阶段。如果给出了一个目标，它应该被定义为它在命令行中（如 jar：jar）。如果定义了一个阶段（如安装），也是如此。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;directory&lt;/strong&gt; ：构建时的输出路径。默认为：${basedir}/target 。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;finalName&lt;/strong&gt; ：这是项目的最终构建名称（不包括文件扩展名，例如：my-project-1.0.jar）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;filter&lt;/strong&gt; ：定义 * .properties 文件，其中包含适用于接受其设置的资源的属性列表（如下所述）。换句话说，过滤器文件中定义的“name = value”对在代码中替换$ {name}字符串。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;resources&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;资源的配置。资源文件通常不是代码，不需要编译，而是在项目需要捆绑使用的内容。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    ...
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;resources&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;resource&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;targetPath&amp;gt;&lt;/span&gt;META-INF/plexus&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/targetPath&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;filtering&amp;gt;&lt;/span&gt;false&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/filtering&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;${basedir}/src/main/plexus&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;includes&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;configuration.xml&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/includes&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;excludes&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;exclude&amp;gt;&lt;/span&gt;**/*.properties&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/exclude&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/excludes&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/resource&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/resources&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;testResources&amp;gt;&lt;/span&gt;
+      ...
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/testResources&amp;gt;&lt;/span&gt;
+    ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;resources&lt;/strong&gt;: 资源元素的列表，每个资源元素描述与此项目关联的文件和何处包含文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;targetPath&lt;/strong&gt;: 指定从构建中放置资源集的目录结构。目标路径默认为基本目录。将要包装在 jar 中的资源的通常指定的目标路径是 META-INF。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;filtering&lt;/strong&gt;: 值为 true 或 false。表示是否要为此资源启用过滤。请注意，该过滤器 * .properties 文件不必定义为进行过滤 - 资源还可以使用默认情况下在 POM 中定义的属性（例如$ {project.version}），并将其传递到命令行中“-D”标志（例如，“-Dname = value”）或由 properties 元素显式定义。过滤文件覆盖上面。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;directory&lt;/strong&gt;: 值定义了资源的路径。构建的默认目录是${basedir}/src/main/resources。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;includes&lt;/strong&gt;: 一组文件匹配模式，指定目录中要包括的文件，使用*作为通配符。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;exclude&lt;/strong&gt;s: 与 includes 类似，指定目录中要排除的文件，使用*作为通配符。注意：如果 include 和 exclude 发生冲突，maven 会以 exclude 作为有效项。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;testResources&lt;/strong&gt;: testResources 与 resources 功能类似，区别仅在于：testResources 指定的资源仅用于 test 阶段，并且其默认资源目录为：${basedir}/src/test/resources 。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;plugins&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    ...
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-jar-plugin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.6&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;extensions&amp;gt;&lt;/span&gt;false&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/extensions&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;inherited&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/inherited&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;classifier&amp;gt;&lt;/span&gt;test&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/classifier&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;...&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;...&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;groupId, artifactId, version&lt;/strong&gt;：和基本配置中的 groupId、artifactId、version 意义相同。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;extensions&lt;/strong&gt; ：值为 true 或 false。是否加载此插件的扩展名。默认为 false。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;inherited&lt;/strong&gt; ：值为 true 或 false。这个插件配置是否应该适用于继承自这个插件的 POM。默认值为 true。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;configuration&lt;/strong&gt;：针对个人插件的配置，这里不扩散讲解。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;dependencies&lt;/strong&gt; ：这里的 dependencies 是插件本身所需要的依赖。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;executions&lt;/strong&gt;：需要记住的是，插件可能有多个目标。每个目标可能有一个单独的配置，甚至可能将插件的目标完全绑定到不同的阶段。执行配置插件的目标的执行。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;id&lt;/strong&gt;: 执行目标的标识。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;goals&lt;/strong&gt;: 像所有多元化的 POM 元素一样，它包含单个元素的列表。在这种情况下，这个执行块指定的插件目标列表。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;phase&lt;/strong&gt;: 这是执行目标列表的阶段。这是一个非常强大的选项，允许将任何目标绑定到构建生命周期中的任何阶段，从而改变 maven 的默认行为。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;inherited&lt;/strong&gt;: 像上面的继承元素一样，设置这个 false 会阻止 maven 将这个执行传递给它的子代。此元素仅对父 POM 有意义。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;configuration&lt;/strong&gt;: 与上述相同，但将配置限制在此特定目标列表中，而不是插件下的所有目标。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-antrun-plugin&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.1&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;executions&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;execution&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;echodir&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;goals&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;goal&amp;gt;&lt;/span&gt;run&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/goal&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/goals&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;phase&amp;gt;&lt;/span&gt;verify&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/phase&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;inherited&amp;gt;&lt;/span&gt;false&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/inherited&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;tasks&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;echo&amp;gt;&lt;/span&gt;Build Dir: ${project.build.directory}&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/echo&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/tasks&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/execution&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/executions&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;pluginManagement&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;与 dependencyManagement 很相似，在当前 POM 中仅声明插件，而不是实际引入插件。子 POM 中只配置 groupId 和 artifactId 就可以完成插件的引用，且子 POM 有权重写 pluginManagement 定义。它的目的在于统一所有子 POM 的插件版本。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;directories&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;sourceDirectory&amp;gt;&lt;/span&gt;${basedir}/src/main/java&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/sourceDirectory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;scriptSourceDirectory&amp;gt;&lt;/span&gt;${basedir}/src/main/scripts&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/scriptSourceDirectory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;testSourceDirectory&amp;gt;&lt;/span&gt;${basedir}/src/test/java&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/testSourceDirectory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;outputDirectory&amp;gt;&lt;/span&gt;${basedir}/target/classes&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/outputDirectory&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;testOutputDirectory&amp;gt;&lt;/span&gt;${basedir}/target/test-classes&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/testOutputDirectory&amp;gt;&lt;/span&gt;
+    ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;目录元素集合存在于 build 元素中，它为整个 POM 设置了各种目录结构。由于它们在配置文件构建中不存在，所以这些不能由配置文件更改。&lt;/p&gt;
+&lt;p&gt;如果上述目录元素的值设置为绝对路径（扩展属性时），则使用该目录。否则，它是相对于基础构建目录：${basedir}。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;extensions&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;扩展是在此构建中使用的 artifacts 的列表。它们将被包含在运行构建的 classpath 中。它们可以启用对构建过程的扩展（例如为 Wagon 传输机制添加一个 ftp 提供程序），并使活动的插件能够对构建生命周期进行更改。简而言之，扩展是在构建期间激活的 artifacts。扩展不需要实际执行任何操作，也不包含 Mojo。因此，扩展对于指定普通插件接口的多个实现中的一个是非常好的。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    ...
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;extensions&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;extension&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.wagon&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;wagon-ftp&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-alpha-3&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/extension&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/extensions&amp;gt;&lt;/span&gt;
+    ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;reporting&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;报告包含特定针对 site 生成阶段的元素。某些 maven 插件可以生成 reporting 元素下配置的报告，例如：生成 javadoc 报告。reporting 与 build 元素配置插件的能力相似。明显的区别在于：在执行块中插件目标的控制不是细粒度的，报表通过配置 reportSet 元素来精细控制。&lt;/p&gt;
+&lt;p&gt;而微妙的区别在于 reporting 元素下的 configuration 元素可以用作 build 下的 configuration ，尽管相反的情况并非如此（ build 下的 configuration 不影响 reporting 元素下的 configuration ）。&lt;/p&gt;
+&lt;p&gt;另一个区别就是 plugin 下的 outputDirectory 元素。在报告的情况下，默认输出目录为 ${basedir}/target/site。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;reporting&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+        ...
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;reportSets&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;reportSet&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;sunlink&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;reports&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;report&amp;gt;&lt;/span&gt;javadoc&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/report&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/reports&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;inherited&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/inherited&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;links&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;link&amp;gt;&lt;/span&gt;http://java.sun.com/j2se/1.5.0/docs/api/&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/link&amp;gt;&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/links&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/reportSet&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/reportSets&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/reporting&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;项目信息&#34;&gt;&lt;strong&gt;项目信息&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;项目信息相关的这部分标签都不是必要的，也就是说完全可以不填写。&lt;/p&gt;
+&lt;p&gt;它的作用仅限于描述项目的详细信息。&lt;/p&gt;
+&lt;p&gt;下面的示例是项目信息相关标签的清单：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 项目信息 begin --&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--项目名--&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;maven-notes&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--项目描述--&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;maven 学习笔记&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--项目url--&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://github.com/dunwu/maven-notes&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--项目开发年份--&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;inceptionYear&amp;gt;&lt;/span&gt;2017&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/inceptionYear&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--开源协议--&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;licenses&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;license&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Apache License, Version 2.0&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://www.apache.org/licenses/LICENSE-2.0.txt&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;distribution&amp;gt;&lt;/span&gt;repo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/distribution&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;comments&amp;gt;&lt;/span&gt;A business-friendly OSS license&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/comments&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/license&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/licenses&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--组织信息(如公司、开源组织等)--&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;organization&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;...&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;...&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/organization&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--开发者列表--&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;developers&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;developer&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;victor&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Zhang Peng&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;email&amp;gt;&lt;/span&gt;forbreak at 163.com&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/email&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://github.com/dunwu&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;organization&amp;gt;&lt;/span&gt;...&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/organization&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;organizationUrl&amp;gt;&lt;/span&gt;...&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/organizationUrl&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;roles&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;role&amp;gt;&lt;/span&gt;architect&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/role&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;role&amp;gt;&lt;/span&gt;developer&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/role&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/roles&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;timezone&amp;gt;&lt;/span&gt;+8&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/timezone&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;...&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/properties&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/developer&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/developers&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--代码贡献者列表--&amp;gt;&lt;/span&gt;
+   &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;contributors&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;contributor&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!--标签内容和&amp;lt;developer&amp;gt;相同--&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/contributor&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/contributors&amp;gt;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- 项目信息 end --&amp;gt;&lt;/span&gt;
+
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这部分标签都非常简单，基本都能做到顾名思义，且都属于可有可无的标签，所以这里仅简单介绍一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;name&lt;/strong&gt; - 项目完整名称&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;description&lt;/strong&gt; - 项目描述&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;url&lt;/strong&gt; - 一般为项目仓库的 host&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;inceptionYear&lt;/strong&gt; - 开发年份&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;licenses&lt;/strong&gt; - 开源协议&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;organization&lt;/strong&gt; - 项目所属组织信息&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;developers&lt;/strong&gt; - 项目开发者列表&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;contributors&lt;/strong&gt; - 项目贡献者列表， 的子标签和 的完全相同。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;环境配置&#34;&gt;&lt;strong&gt;环境配置&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;issueManagement&lt;/strong&gt;
+这定义了所使用的缺陷跟踪系统（Bugzilla，TestTrack，ClearQuest 等）。虽然没有什么可以阻止插件使用这些信息的东西，但它主要用于生成项目文档。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;issueManagement&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;system&amp;gt;&lt;/span&gt;Bugzilla&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/system&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://127.0.0.1/bugzilla/&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/issueManagement&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;ciManagement&lt;/strong&gt;
+CI 构建系统配置，主要是指定通知机制以及被通知的邮箱。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;ciManagement&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;system&amp;gt;&lt;/span&gt;continuum&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/system&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://127.0.0.1:8080/continuum&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;notifiers&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;notifier&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;mail&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;sendOnError&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/sendOnError&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;sendOnFailure&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/sendOnFailure&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;sendOnSuccess&amp;gt;&lt;/span&gt;false&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/sendOnSuccess&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;sendOnWarning&amp;gt;&lt;/span&gt;false&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/sendOnWarning&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;configuration&amp;gt;&amp;lt;address&amp;gt;&lt;/span&gt;continuum@127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/address&amp;gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/notifier&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/notifiers&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/ciManagement&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;mailingLists&lt;/strong&gt;
+邮件列表&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;mailingLists&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;mailingList&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;User List&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;subscribe&amp;gt;&lt;/span&gt;user-subscribe@127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/subscribe&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;unsubscribe&amp;gt;&lt;/span&gt;user-unsubscribe@127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/unsubscribe&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;post&amp;gt;&lt;/span&gt;user@127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/post&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;archive&amp;gt;&lt;/span&gt;http://127.0.0.1/user/&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/archive&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;otherArchives&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;otherArchive&amp;gt;&lt;/span&gt;http://base.google.com/base/1/127.0.0.1&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/otherArchive&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/otherArchives&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/mailingList&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/mailingLists&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;scm&lt;/strong&gt;
+SCM（软件配置管理，也称为源代码/控制管理或简洁的版本控制）。常见的 scm 有 svn 和 git 。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;scm&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;connection&amp;gt;&lt;/span&gt;scm:svn:http://127.0.0.1/svn/my-project&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/connection&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;developerConnection&amp;gt;&lt;/span&gt;scm:svn:https://127.0.0.1/svn/my-project&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/developerConnection&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;tag&amp;gt;&lt;/span&gt;HEAD&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/tag&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://127.0.0.1/websvn/my-project&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/scm&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;prerequisites&lt;/strong&gt;
+POM 执行的预设条件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;prerequisites&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;maven&amp;gt;&lt;/span&gt;2.0.6&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/maven&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/prerequisites&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;repositories&lt;/strong&gt;
+repositories 是遵循 Maven 存储库目录布局的 artifacts 集合。默认的 Maven 中央存储库位于https://repo.maven.apache.org/maven2/上。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;repositories&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;repository&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;releases&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;false&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/enabled&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;updatePolicy&amp;gt;&lt;/span&gt;always&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/updatePolicy&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;checksumPolicy&amp;gt;&lt;/span&gt;warn&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/checksumPolicy&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/releases&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;snapshots&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;true&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/enabled&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;updatePolicy&amp;gt;&lt;/span&gt;never&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/updatePolicy&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;checksumPolicy&amp;gt;&lt;/span&gt;fail&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/checksumPolicy&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/snapshots&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;codehausSnapshots&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Codehaus Snapshots&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;http://snapshots.maven.codehaus.org/maven2&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;layout&amp;gt;&lt;/span&gt;default&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/layout&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;pluginRepositories&amp;gt;&lt;/span&gt;
+    ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/pluginRepositories&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;pluginRepositories&lt;/strong&gt;
+与 repositories 差不多。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;distributionManagement&amp;gt;&lt;/span&gt;
+    ...
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;downloadUrl&amp;gt;&lt;/span&gt;http://mojo.codehaus.org/my-project&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/downloadUrl&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;status&amp;gt;&lt;/span&gt;deployed&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/status&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/distributionManagement&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;distributionManagement&lt;/strong&gt;
+它管理在整个构建过程中生成的 artifact 和支持文件的分布。从最后的元素开始：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;distributionManagement&amp;gt;&lt;/span&gt;
+    ...
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;downloadUrl&amp;gt;&lt;/span&gt;http://mojo.codehaus.org/my-project&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/downloadUrl&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;status&amp;gt;&lt;/span&gt;deployed&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/status&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/distributionManagement&amp;gt;&lt;/span&gt;
+  ...
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;repository - 与 repositories 相似
+site - 站点信息
+relocation - 项目迁移位置
+profiles
+activation 是一个 profile 的关键。配置文件的功能来自于在某些情况下仅修改基本 POM 的功能。这些情况通过 activation 元素指定。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color:#75af00&#34;&gt;xmlns=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75af00&#34;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;&amp;#34;http://maven.apache.org/POM/4.0.0
+&lt;/span&gt;&lt;span style=&#34;color:#d88200&#34;&gt;                      https://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+  ...
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;profiles&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;profile&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;test&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;activation&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;activeByDefault&amp;gt;&lt;/span&gt;false&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/activeByDefault&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;jdk&amp;gt;&lt;/span&gt;1.5&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/jdk&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;os&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Windows XP&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;family&amp;gt;&lt;/span&gt;Windows&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/family&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;arch&amp;gt;&lt;/span&gt;x86&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/arch&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;5.1.2600&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/os&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;sparrow-type&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;African&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;file&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;exists&amp;gt;&lt;/span&gt;${basedir}/file2.properties&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/exists&amp;gt;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;missing&amp;gt;&lt;/span&gt;${basedir}/file1.properties&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/missing&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/file&amp;gt;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/activation&amp;gt;&lt;/span&gt;
+      ...
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/profile&amp;gt;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/profiles&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

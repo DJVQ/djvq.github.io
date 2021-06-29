@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>英文单词 on YCQの个人博客</title>
+    <link>https://djvq.github.io/tags/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/</link>
+    <description>Recent content in 英文单词 on YCQの个人博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright © 2021~2022</copyright>
+    <lastBuildDate>Sun, 23 May 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://djvq.github.io/tags/%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>一些重要的单词</title>
+      <link>https://djvq.github.io/post/%E4%B8%80%E4%BA%9B%E9%87%8D%E8%A6%81%E5%8D%95%E8%AF%8D/</link>
+      <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://djvq.github.io/post/%E4%B8%80%E4%BA%9B%E9%87%8D%E8%A6%81%E5%8D%95%E8%AF%8D/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%E7%9B%AE%E5%BD%95&#34;&gt;目录&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#kernal&#34;&gt;kernal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#hypervisor&#34;&gt;hypervisor&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;kernal&#34;&gt;kernal&lt;/h2&gt;
+&lt;p&gt;Kernal，内核，是操作系统最基本的部分，它是为众多应用程序提供对计算机硬件的安全访问的一部分软件，这种访问是有限的，并且内核决定一个程序在什么时候对某部分硬件操作多长时间。内核的分类可分为单内核和双内核以及微内核。严格地说，内核并不是计算机系统中必要的组成部分。&lt;/p&gt;
+&lt;h2 id=&#34;hypervisor&#34;&gt;hypervisor&lt;/h2&gt;
+&lt;p&gt;Hypervisor，又称虚拟机监视器（英语：virtual machine monitor，缩写为 VMM），是用来建立与执行虚拟机器的软件、固件或硬件。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
