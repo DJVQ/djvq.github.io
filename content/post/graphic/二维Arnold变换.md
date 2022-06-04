@@ -1,6 +1,6 @@
 ---
 title: "二维Arnold变换"
-date: 2021-03-27
+date: 2022-03-27
 tags: ["学习","Arnold","图像处理"]
 description: "一种置乱方法"
 ---
