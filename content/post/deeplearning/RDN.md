@@ -8,8 +8,8 @@ description: ""
 ### 网络结构：
 
 ![image](/image/RDN/RDN.png)
-![image](https://images.cnblogs.com/cnblogs_com/blogs/745349/galleries/2152570/o_220428132646_RDN.png)
-![image](https://images.cnblogs.com/cnblogs_com/blogs/745349/galleries/2152570/o_220428133045_DB.png)
+![image](/image/RDN/RDB.png))
+![image](/image/RDN/DB.png))
 
 ### 特点：
 Dense block中的每一个块都与前面块的输出取并集，在优化的时候loss不容易降低。用于超分辨率重建以及与之相关的图像处理任务如图像隐写。

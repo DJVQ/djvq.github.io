@@ -462,8 +462,8 @@ pool = new ThreadPoolExecutor(
 	- 后者控制更加精细，前者不能手动释放，后者可以
 
 20. Collection、Map
-![image](https://images.cnblogs.com/cnblogs_com/blogs/745349/galleries/2168507/o_220529130213_Collection.png)
-![image](https://images.cnblogs.com/cnblogs_com/blogs/745349/galleries/2168507/o_220529130208_Map.png)
+![image](/image/Java/Collection.png)
+![image](/image/Java/Map.png)
 
 21. 迭代器Iterater
 ```Java
@@ -503,11 +503,11 @@ abcde
 	- stack：栈，存放基本数据类型或对象的引用，一般大小确定，物理地址连续
 
 23. Java内存区域
-![image](https://pic1.zhimg.com/v2-0f3f0f15b96c57b6a6e991fa88bfe5f5_1440w.jpg?source=172ae18b)
+![image](/image/Java/JavaMemory.png)
 转自知乎：https://zhuanlan.zhihu.com/p/297001119
 
 24. I/O流
-![image](https://images.cnblogs.com/cnblogs_com/blogs/745349/galleries/2168507/o_220601082017_JavaIO.jpg)
+![image](/image/Java/JavaIO.png))
 
 25. GC
 	- Garbage Collection：
