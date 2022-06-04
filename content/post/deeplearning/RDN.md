@@ -7,7 +7,7 @@ description: ""
 # RDN
 ### 网络结构：
 
-![image](https://images.cnblogs.com/cnblogs_com/blogs/745349/galleries/2152570/o_220428132639_RDB.png)
+![image](/image/RDN/RDN.png)
 ![image](https://images.cnblogs.com/cnblogs_com/blogs/745349/galleries/2152570/o_220428132646_RDN.png)
 ![image](https://images.cnblogs.com/cnblogs_com/blogs/745349/galleries/2152570/o_220428133045_DB.png)
 
