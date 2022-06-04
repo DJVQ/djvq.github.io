@@ -7,9 +7,9 @@ description: ""
 # RDN
 ### 网络结构：
 
-![image](https://img2022.cnblogs.com/blog/2824216/202204/2824216-20220428213154489-1038962111.png)
-![image](https://img2022.cnblogs.com/blog/2824216/202204/2824216-20220428213336720-757541150.png)
-![image](https://img2022.cnblogs.com/blog/2824216/202204/2824216-20220428213349367-458967360.png)
+![image](~/RDN/RDN.png)
+![image](~/RDN/RDB.png)
+![image](~/RDN/DB.png)
 
 ### 特点：
 Dense block中的每一个块都与前面块的输出取并集，在优化的时候loss不容易降低。用于超分辨率重建以及与之相关的图像处理任务如图像隐写。

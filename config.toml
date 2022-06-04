@@ -863,10 +863,10 @@ uglyURLs = false
     #      (~/blog/static/images/meme.jpg)
 
     # 是否开启
-    enableImageHost = false
+    enableImageHost = true
 
     # 图片外链地址
-    imageHostURL = "https://example.com/"
+    imageHostURL = "https://github.com/DJVQ/djvq.github.io/tree/build/image/"
 
     # 是否将 HTML 的头部元数据中的图片链接也替换为外链
     headAlso = false
