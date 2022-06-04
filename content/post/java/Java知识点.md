@@ -507,7 +507,7 @@ abcde
 转自知乎：https://zhuanlan.zhihu.com/p/297001119
 
 24. I/O流
-![image](/image/Java/JavaIO.png))
+![image](/image/Java/JavaIO.png)
 
 25. GC
 	- Garbage Collection：
