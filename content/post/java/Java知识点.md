@@ -29,6 +29,7 @@ description: "Java知识"
 	 synchronized、transient、volatile:
 
 ## 备忘
+### SE
 1. &与&&
 	- 两者都表示逻辑与，前者可以作位运算符使用，表示按位与，后者有短路的作用，比如A&&B，若A为False，则不会执行B。
 
@@ -517,3 +518,191 @@ abcde
 		- Generational Collection：分代收集；根据Java堆代的区别，使用合适的收集算法。
 (待补充)
 	- 内存泄漏：长生命周期的对象引用了短生命周期的对象，短生命周期对象的引用无法释放，可能会发生内存泄漏
+
+26. ClassLoader与获取Class对象的四种方式
+```Java
+    Class ca = cb.class;
+    Class ca = Class.forname("com.xxx.xxx.cb");
+    Class ca = new cb().getClass()
+    ClassLoader.getSystemClassLoader().loadClass("com.xxx.xxx.cb");
+```
+    - ClassLoader获取的Class对象不会进行初始化静态代码块和对象不执行
+
+27. Java序列化
+    - 序列化位于TCP/IP协议的应用层，与之对应的是反序列化；
+    - Java序列化将对象转化为二进制字节流，在对象在进行网络传输等场景时可能会用到
+    - Java序列化分为跨语言序列化和非跨语言序列化，对于非跨语言序列化，JDK有自带的序列化，只需要实现Serializable接口即可，但是性能差，所以可以用Kryo序列化工具代替；对于跨语言序列化，有Protobuf、ProtoStufhessian等工具
+    - 使用transient修饰的对象不会被序列化
+
+28. 反射-Reflect
+    - 作用：能获取以及调用任意类的所有属性和方法，多用于Spring/Spring Boot MyBatis等框架
+    - 用法：
+    ```Java
+    public class TargetObject {
+    private String value;
+
+    public TargetObject() {
+        value = "JavaGuide";
+    }
+
+    public void publicMethod(String s) {
+        System.out.println("I love " + s);
+    }
+
+    private void privateMethod() {
+        System.out.println("value is " + value);
+    }
+    }
+    ```
+    ```Java
+        Class<?> targetClass = Class.forName("cn.javaguide.TargetObject");
+        TargetObject targetObject = (TargetObject) targetClass.newInstance();
+
+        Method[] methods = targetClass.getDeclaredMethods();
+        for (Method method : methods) {
+            System.out.println(method.getName());
+        }
+
+        Method publicMethod = targetClass.getDeclaredMethod("publicMethod",
+                String.class);
+
+        publicMethod.invoke(targetObject, "JavaGuide");
+
+        Field field = targetClass.getDeclaredField("value");
+        field.setAccessible(true);
+        field.set(targetObject, "JavaGuide");
+
+        Method privateMethod = targetClass.getDeclaredMethod("privateMethod");
+        privateMethod.setAccessible(true);
+        privateMethod.invoke(targetObject);
+    ```
+
+27. 代理
+    - 作用：在不改变原目标对象的情况下，提供额外的功能操作，扩展目标对象的功能
+    - 分类：分为静态代理和动态代理，静态代理的缺点在于每一个类都需要为其写代理类，所以很多情况下使用的时动态代理；Java原生的动态代理机制只针对实现了接口的类，有CGLIB动态代理这种工具可以代理普通类
+    - 实现：
+        - 静态
+        ```Java
+        public interface SmsService {
+            String send(String message);
+        }
+        ```
+        ```Java
+        public class SmsServiceImpl implements SmsService {
+            public String send(String message) {
+                System.out.println("send message:" + message);
+                return message;
+            }
+        }
+        ```
+        ```Java
+        public class SmsProxy implements SmsService {
+            private final SmsService smsService;
+            public SmsProxy(SmsService smsService) {
+                this.smsService = smsService;
+            }
+            @Override
+            public String send(String message) {
+                //调用方法之前，我们可以添加自己的操作
+                System.out.println("before method send()");
+                smsService.send(message);
+                //调用方法之后，我们同样可以添加自己的操作
+                System.out.println("after method send()");
+                return null;
+            }
+        }
+        ```
+        - 动态(原生)
+        ```Java
+        import java.lang.reflect.InvocationHandler;
+        import java.lang.reflect.InvocationTargetException;
+        import java.lang.reflect.Method;
+
+        public class DebugInvocationHandler implements InvocationHandler {
+            private final Object target;
+
+            public DebugInvocationHandler(Object target) {
+                this.target = target;
+            }
+
+            public Object invoke(Object proxy, Method method, Object[] args) throws InvocationTargetException, IllegalAccessException {
+                System.out.println("before method " + method.getName());
+                Object result = method.invoke(target, args);
+                System.out.println("after method " + method.getName());
+                return result;
+            }
+        }
+
+        ```
+        ```Java
+        public class JdkProxyFactory {
+            public static Object getProxy(Object target) {
+                return Proxy.newProxyInstance(
+                        target.getClass().getClassLoader(), // 目标类的类加载
+                        target.getClass().getInterfaces(),  // 代理需要实现的接口，可指定多个
+                        new DebugInvocationHandler(target)   // 代理对象对应的自定义 InvocationHandler
+                );
+            }
+        }
+        ```
+        ```Java
+        SmsService smsService = (SmsService) JdkProxyFactory.getProxy(new SmsServiceImpl());
+        smsService.send("java");
+        ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+28. JavaIO模型
+    - IO模型一般为同步阻塞、同步非阻塞、多路复用、信号驱动、异步这五种
+        - 同步阻塞：在应用调用recvfrom读取数据时，其系统调用直到数据包到达且被复制到应用缓冲区中或者发送错误时才返回，在此期间一直会等待，进程从调用到返回这段时间内都是被阻塞的称为阻塞IO；
+        - 同步非阻塞：非阻塞IO是在应用调用recvfrom读取数据时，如果该缓冲区没有数据的话，就会直接返回一个EWOULDBLOCK错误，不会让应用一直等待中。在没有数据的时候会即刻返回错误标识，那也意味着如果应用要读取数据就需要不断的调用recvfrom请求，直到读取到它数据要的数据为止；
+        - 多路复用：进程通过将一个或多个fd传递给select，阻塞在select操作上，select帮我们侦测多个fd是否准备就绪，当有fd准备就绪时，select返回数据可读状态，应用程序再调用recvfrom读取数据；
+        - 信号驱动：首先开启套接口信号驱动IO功能，并通过系统调用sigaction执行一个信号处理函数，此时请求即刻返回，当数据准备就绪时，就生成对应进程的SIGIO信号，通过信号回调通知应用线程调用recvfrom来读取数据；
+        - 异步：首先开启套接口信号驱动IO功能，并通过系统调用sigaction执行一个信号处理函数，此时请求即刻返回，当数据准备就绪时，就生成对应进程的SIGIO信号，通过信号回调通知应用线程调用recvfrom来读取数据。
+    - JavaIO有BIO，类似于同步阻塞；NIO，多路复用？同步非阻塞？；AIO(NIO 2)，异步
+
+29. BigDecimal
+```Java
+float a = 2.0f - 1.9f;
+float b = 1.8f - 1.7f;
+System.out.println(a);// 0.100000024
+System.out.println(b);// 0.099999905
+System.out.println(a == b);// false
+```
+```Java
+BigDecimal a = new BigDecimal("1.0");
+BigDecimal b = new BigDecimal("0.9");
+BigDecimal c = new BigDecimal("0.8");
+
+BigDecimal x = a.subtract(b);
+BigDecimal y = b.subtract(c);
+
+System.out.println(x); /* 0.1 */
+System.out.println(y); /* 0.1 */
+System.out.println(Objects.equals(x, y)); /* true */
+```
+```Java
+BigDecimal a = new BigDecimal("1.0");
+BigDecimal b = new BigDecimal("0.9");
+System.out.println(a.add(b));// 1.9
+System.out.println(a.subtract(b));// 0.1
+System.out.println(a.multiply(b));// 0.90
+System.out.println(a.divide(b));// 无法除尽，抛出 ArithmeticException 异常
+System.out.println(a.divide(b, 2, RoundingMode.HALF_UP));// 1.11
+```
+禁止BigDecimal(Double)这种构造方法，会产生精度丢失
+______
+
