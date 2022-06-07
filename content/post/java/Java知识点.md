@@ -651,20 +651,6 @@ abcde
         ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 28. JavaIO模型
     - IO模型一般为同步阻塞、同步非阻塞、多路复用、信号驱动、异步这五种
         - 同步阻塞：在应用调用recvfrom读取数据时，其系统调用直到数据包到达且被复制到应用缓冲区中或者发送错误时才返回，在此期间一直会等待，进程从调用到返回这段时间内都是被阻塞的称为阻塞IO；
@@ -704,5 +690,44 @@ System.out.println(a.divide(b));// 无法除尽，抛出 ArithmeticException 异
 System.out.println(a.divide(b, 2, RoundingMode.HALF_UP));// 1.11
 ```
 禁止BigDecimal(Double)这种构造方法，会产生精度丢失
+
+30. 双锁单例模式
+```Java
+public class App 
+{
+    private static volatile App app;
+
+    public static App getNewInstance(){
+        if (app == null){
+            synchronized(App.class) {
+                if (app == null){
+                    app = new App();
+                }
+            }
+        }
+        return app;
+    }
+}
+```
+
+31. 强引用、软引用、弱引用、虚引用
+    - 强引用：gc不回收
+    - 软引用：内存不够时gc回收，可用于浏览器缓存页面
+    - 弱引用：gc会回收
+    - 虚引用：必须与引用队列一起使用，当gc准备回收一个对象，若发现其有虚引用，则将虚引用加入之前关联的引用队列，程序可通过判断虚引用是否被加入引用队列了解对象是否被回收，决定是否采取某些行动
+
+32. Java 注解
+    - @Override 检查是否重写，若无被重写方法报编译错误
+    - @Deprecated 标记过时方法，使用方法会报编译警告
+    - @SuppressWarning 指示编译器忽略注解中声明的警告
+    - @Retention 规定注解在什么时候有效
+    - @Documented 表示是否将注解生成在JAVAdoc中
+    - @Target 描述注解使用范围
+    - @Inherited 表示子类可以继承父类的注解
+    - @SafeVarargs
+    - @FunctionalInterface
+    - @Repeatable
+
+    
 ______
 
