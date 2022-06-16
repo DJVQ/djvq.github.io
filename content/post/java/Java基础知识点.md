@@ -1,5 +1,5 @@
 ---
-title: "Java知识点"
+title: "Java基础知识点"
 date: 2022-06-04
 tags: ["学习","Java"]
 description: "Java知识"
@@ -727,7 +727,9 @@ public class App
     - @SafeVarargs
     - @FunctionalInterface
     - @Repeatable
+    注解可通过反射获取
 
-    
+——————
+2022/06/07
 ______
 
