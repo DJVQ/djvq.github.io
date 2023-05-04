@@ -1,7 +1,3 @@
-<!--
-createdAt:2023-04-21
-createdBy:ycq
--->
 ---
 title: "C++关键字"
 date: 2023-04-21

@@ -1,7 +1,3 @@
-<!--
-createdAt:2023-04-22
-createdBy:ycq
--->
 ---
 title: "排序算法"
 date: 2023-04-22

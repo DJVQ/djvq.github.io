@@ -1,7 +1,3 @@
-<!--
-createdAt:2023-04-20
-createdBy:ycq
--->
 ---
 title: "C++杂项"
 date: 2023-04-20

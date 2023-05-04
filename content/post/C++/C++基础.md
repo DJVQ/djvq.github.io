@@ -1,7 +1,3 @@
-<!--
-createdAt:2023-04-13
-createdBy:ycq
--->
 ---
 title: "C++基础"
 date: 2023-04-13

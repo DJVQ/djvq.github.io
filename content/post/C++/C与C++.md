@@ -1,7 +1,3 @@
-<!--
-createdAt:2023-04-28
-createdBy:ycq
--->
 ---
 title: "C与C++"
 date: 2023-04-28
